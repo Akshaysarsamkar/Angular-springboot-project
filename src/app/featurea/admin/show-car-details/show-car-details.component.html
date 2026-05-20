@@ -1,0 +1,18 @@
+<div class="cars-page">
+  <!-- Header -->
+  <div class="cars-page__header">
+    <div>
+      <h1>Explore Premium Cars</h1>
+      <p>Browse luxury and performance vehicles available now.</p>
+    </div>
+    <button class="filter-btn">Filters</button>
+  </div>
+
+  <!-- Cards -->
+  <div class="cars-list">
+    <app-car-details-card *ngFor="let car of cars()" [carDetails]="car" (carDeleted)="onCarDeleted($event)" />
+  </div>
+
+</div>
+
+<app-spinner-loader *ngIf="isLoading()"></app-spinner-loader> 

@@ -1,0 +1,13 @@
+$header-height: 68px;
+
+.layout {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  &__content {
+    height: 100vh;
+    // margin-top: 68px;
+    overflow: hidden;
+  }
+}

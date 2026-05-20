@@ -1,0 +1,10 @@
+<div
+  *ngIf="loading"
+  class="spinner-overlay"
+  [class.fullscreen]="fullscreen"
+>
+  <div class="spinner-box">
+    <div class="spinner" [ngClass]="size"></div>
+  </div>
+
+</div>

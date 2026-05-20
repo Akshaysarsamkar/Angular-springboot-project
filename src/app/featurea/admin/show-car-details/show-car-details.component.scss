@@ -1,0 +1,76 @@
+:host {
+  width: 100%;
+  display: block;
+}
+
+.cars-page {
+  width: 100%;
+  padding: 2rem;
+  min-height: 100vh;
+  background:radial-gradient( circle at top right, rgba(109,90,232,.12), transparent 25%),#080a12;
+
+  &__header {
+    width: 100%;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #f4f6ff;
+      margin-bottom: .4rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #8f95ad;
+    }
+  }
+}
+
+.cars-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.filter-btn {
+  height: 3.2rem;
+  padding: 0 1.4rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  background:linear-gradient(135deg,#6d5ae8,#3b82f6);
+  color: #fff;
+  font-size: .92rem;
+  font-weight: 700;
+  box-shadow:0 .7rem 1.8rem rgba(109,90,232,.28);
+  transition:transform .2s ease,opacity .2s ease;
+
+  &:hover {
+    transform: translateY(-.1rem);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .cars-page {
+    padding: 1rem;
+
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+      h1 {
+        font-size: 1.7rem;
+      }
+    }
+  }
+  .filter-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,132 @@
+<div class="post-car">
+    <div class="post-car__bg"></div>
+    <div class="post-car__card">
+        <div class="post-car__header">
+            <div>
+                <h2>{{ isEditMode ? 'Update Car' : 'Add New Car' }}</h2>
+                <p>{{ isEditMode ? 'Update vehicle details below' : 'Fill all required vehicle details below' }}</p>
+            </div>
+            <div class="post-car__badge">Premium Form</div>
+        </div>
+        <form class="car-form" [formGroup]="cardDetails" autocomplete="off">
+
+            <!-- Row 1 -->
+            <div class="car-form__row">
+                <!-- Brand -->
+                <div class="field">
+                    <label>Brand Name</label>
+                    <div class="field__wrapper">
+                        <select formControlName="brand">
+                            <option value="">Select Brand</option>
+                            <option *ngFor="let brand of listOfBrands()" [value]="brand">{{ brand }}</option>
+                        </select>
+                    </div>
+                    <div class="field__error">{{ getErrorMessage('brand') }} </div>
+                </div>
+
+                <!-- Car Name -->
+                <div class="field">
+                    <label>Car Name</label>
+                    <div class="field__wrapper">
+                        <input type="text" formControlName="name" placeholder="Enter Car Name" />
+                    </div>
+                    <div class="field__error"> {{ getErrorMessage('name') }} </div>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="car-form__row">
+                <!-- Type -->
+                <div class="field">
+                    <label>Type</label>
+                    <div class="field__wrapper">
+                        <select formControlName="type">
+                            <option value="">Select Type</option>
+                            <option *ngFor="let type of listOfTypes()" [value]="type">{{ type }}</option>
+                        </select>
+                    </div>
+                    <div class="field__error"> {{ getErrorMessage('type') }}</div>
+                </div>
+
+                <!-- Color -->
+                <div class="field">
+                    <label>Color</label>
+                    <div class="field__wrapper">
+                        <select formControlName="color">
+                            <option value="">Select Color</option>
+                            <option *ngFor="let color of colorList()" [value]="color">{{ color }}</option>
+                        </select>
+                    </div>
+                    <div class="field__error"> {{ getErrorMessage('color') }}</div>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="car-form__row">
+                <!-- Year -->
+                <div class="field">
+                    <label>Model Year</label>
+                    <div class="field__wrapper">
+                        <input type="date" formControlName="year" placeholder="Select Model Year" />
+                    </div>
+                    <div class="field__error">{{ getErrorMessage('year') }}</div>
+                </div>
+
+                <!-- Price -->
+                <div class="field">
+                    <label>Price</label>
+                    <div class="field__wrapper">
+                        <input type="text" formControlName="price" placeholder="Enter Price" />
+                    </div>
+                    <div class="field__error">{{ getErrorMessage('price') }}</div>
+                </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="car-form__row">
+                <!-- Transmission -->
+                <div class="field">
+                    <label>Transmission</label>
+                    <div class="field__wrapper">
+                        <select formControlName="transmission">
+                            <option value="">Select Transmission</option>
+                            <option *ngFor="let transmission of listofTransmission()" [value]="transmission"> {{
+                                transmission }} </option>
+                        </select>
+                    </div>
+                    <div class="field__error">{{ getErrorMessage('transmission') }}</div>
+                </div>
+
+                <!-- Image URL -->
+                <div class="field">
+                    <label>Car Image URL</label>
+                    <div class="field__wrapper">
+                        <input type="text" formControlName="imgUrl" placeholder="Paste car image URL..." />
+                    </div>
+                    <div class="field__error"> {{ getErrorMessage('imgUrl') }}</div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="car-form__row">
+                <div class="field field--full">
+                    <label>Description</label>
+                    <div class="field__wrapper">
+                        <textarea formControlName="description" rows="6"
+                            placeholder="Write vehicle description..."></textarea>
+                    </div>
+                    <div class="field__error"> {{ getErrorMessage('description') }} </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="car-form__actions">
+                <button type="button" class="btn btn--secondary">Cancel</button>
+                <button type="submit" class="btn btn--primary" [disabled]="cardDetails.invalid"
+                    (click)="submitCarDetails()">{{ isEditMode ? 'Update Car' : 'Post Car' }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-spinner-loader *ngIf="isLoading()"></app-spinner-loader>

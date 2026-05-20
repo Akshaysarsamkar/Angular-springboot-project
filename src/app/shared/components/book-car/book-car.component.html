@@ -1,0 +1,225 @@
+<div class="book-page">
+
+    <div class="book-card">
+
+        <!-- LEFT IMAGE -->
+        <div class="book-card__image">
+
+            <img
+                [src]="carDetails().imgUrl"
+                [alt]="carDetails().name">
+
+            <div class="image-overlay"></div>
+
+            <div class="brand-badge">
+                {{ carDetails().brand }}
+            </div>
+
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="book-card__content">
+
+            <!-- HEADER -->
+            <div class="car-header">
+
+                <div>
+
+                    <h1>
+                        {{ carDetails().name }}
+                    </h1>
+
+                    <p class="car-type">
+                        {{ carDetails().type }}
+                    </p>
+
+                </div>
+
+                <div class="price-box">
+
+                    <span>
+                        Rental Price
+                    </span>
+
+                    <h2>
+                        ₹ {{ carDetails().price }}
+                    </h2>
+
+                    <p>
+                        Per Day
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- SPECS -->
+            <div class="specs-grid">
+
+                <div class="spec-card">
+
+                    <span class="label">
+                        Year
+                    </span>
+
+                    <span class="value">
+                        {{ carDetails().year }}
+                    </span>
+
+                </div>
+
+                <div class="spec-card">
+
+                    <span class="label">
+                        Color
+                    </span>
+
+                    <span class="value">
+                        {{ carDetails().color }}
+                    </span>
+
+                </div>
+
+                <div class="spec-card">
+
+                    <span class="label">
+                        Transmission
+                    </span>
+
+                    <span class="value">
+                        {{ carDetails().transmission }}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="description-section">
+
+                <h3>
+                    About This Car
+                </h3>
+
+                <p>
+                    {{ carDetails().description }}
+                </p>
+
+            </div>
+
+            <!-- BOOKING FORM -->
+            <form
+                class="booking-form"
+                [formGroup]="bookingForm">
+
+                <h3>
+                    Book This Car
+                </h3>
+
+                <div class="form-grid">
+
+                    <div class="form-field">
+
+                        <label>
+                            From Date
+                        </label>
+
+                        <input
+                            type="date"
+                            formControlName="fromDate">
+
+                    </div>
+
+                    <div class="form-field">
+
+                        <label>
+                            To Date
+                        </label>
+
+                        <input
+                            type="date"
+                            formControlName="toDate">
+
+                    </div>
+
+                </div>
+
+                <!-- SUMMARY -->
+                <div class="booking-summary">
+
+                    <div class="summary-card">
+
+                        <span>
+                            Total Days
+                        </span>
+
+                        <h4>
+                            {{ calculateTotalDays() }}
+                        </h4>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <span>
+                            Total Amount
+                        </span>
+
+                        <h4>
+                            ₹ {{ getTotalAmount() }}
+                        </h4>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <!-- AVAILABILITY -->
+            <div class="booking-info">
+
+                <div class="booking-info__item">
+
+                    <span class="booking-label">
+                        Availability
+                    </span>
+
+                    <span class="booking-value available">
+                        Available
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="action-section">
+
+                <button
+                    type="button"
+                    class="btn btn--secondary"
+                    (click)="navigateToCarDetails()">
+
+                    Back
+
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn--primary"
+                    [disabled]="bookingForm.invalid"
+                    (click)="confirmBooking()">
+
+                    Confirm Booking
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<app-spinner-loader *ngIf="isLoading()"></app-spinner-loader>

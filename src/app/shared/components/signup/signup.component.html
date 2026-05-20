@@ -1,0 +1,120 @@
+<app-header></app-header> 
+<div class="auth-page">
+
+  <div class="bg">
+    <div class="bg__blob bg__blob--violet"></div>
+    <div class="bg__blob bg__blob--blue"></div>
+    <div class="bg__blob bg__blob--rose"></div>
+    <div class="bg__grid"></div>
+  </div>
+
+  <div class="card">
+    <div class="card__body">
+      <div class="card__intro">
+        <h1 class="card__title">Create account</h1>
+        <p class="card__sub">Book your perfect ride in minutes.</p>
+      </div>
+
+      <form class="form" [formGroup]="signupForm" autocomplete="off">
+
+        <div class="field" [class.field--error]="name.invalid && name.touched">
+          <label class="field__label" for="name">Full name</label>
+          <div class="field__wrap">
+            <svg class="field__icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.6">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+            <input
+              class="field__input"
+              id="name"
+              type="text"
+              placeholder="Jane Doe"
+              formControlName="name"
+              autocomplete="off" />
+          </div>
+          <span class="field__error" *ngIf="name.touched && name.hasError('required')">
+            Full name is required.
+          </span>
+        </div>
+
+        <div class="field" [class.field--error]="email.invalid && email.touched">
+          <label class="field__label" for="email">Email address</label>
+          <div class="field__wrap">
+            <svg class="field__icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.6">
+              <rect x="2" y="4" width="20" height="16" rx="3" />
+              <path d="M2 8l10 6 10-6" />
+            </svg>
+            <input
+              class="field__input"
+              id="email"
+              type="email"
+              placeholder="jane@example.com"
+              formControlName="email"
+              autocomplete="off"
+              (input)="email.updateValueAndValidity()" />
+          </div>
+          <span class="field__error" *ngIf="email.touched && email.hasError('required')">
+            Email is required.
+          </span>
+          <span class="field__error" *ngIf="email.touched && email.hasError('email')">
+            Enter a valid email address.
+          </span>
+        </div>
+
+        <div class="field" [class.field--error]="password.invalid && password.touched">
+          <label class="field__label" for="password">Password</label>
+          <div class="field__wrap">
+            <svg class="field__icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.6">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            <input
+              class="field__input"
+              id="password"
+              type="password"
+              placeholder="Min. 6 characters"
+              formControlName="password"
+              autocomplete="new-password"
+              (input)="password.updateValueAndValidity()" />
+          </div>
+          <span class="field__error" *ngIf="password.touched && password.hasError('required')">
+            Password is required.
+          </span>
+          <span class="field__error" *ngIf="password.touched && password.hasError('minlength')">
+            Password must be at least 6 characters.
+          </span>
+        </div>
+
+        <label class="checkbox">
+          <input class="checkbox__input" type="checkbox" />
+          <span class="checkbox__box"></span>
+          <span class="checkbox__text">
+            I agree to the
+            <a href="#" class="link">Terms of Service</a>
+            and
+            <a href="#" class="link">Privacy Policy</a>
+          </span>
+        </label>
+
+        <p class="error-message" *ngIf="isError">{{(errorMessage())}}</p>
+
+        <button class="btn-register" type="submit" [disabled]="signupForm.invalid" (click)="onSignUp()">
+          <span>Create account</span>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
+
+      </form>
+    </div>
+
+    <div class="card__footer">
+      <p>Already have an account? <a class="link link--accent" (click)="onSignIn()">Sign in →</a></p>
+    </div>
+  </div>
+</div>
+
+<app-spinner-loader [loading]="isLoading" [fullscreen]="true" size="md"></app-spinner-loader>

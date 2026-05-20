@@ -1,0 +1,362 @@
+$bg: #080a12;
+
+$surface: #0f1119;
+$surface-light: #171b27;
+$surface-hover: #1e2333;
+
+$accent: #6d5ae8;
+$accent-light: #b3a4f8;
+
+$text: #ecedf5;
+$muted: #6b6f85;
+
+$border: rgba(255, 255, 255, .07);
+$border-hover: rgba(255, 255, 255, .14);
+
+$shadow: 0 1.5rem 4rem rgba(0, 0, 0, .45);
+
+$ease: cubic-bezier(.4, 0, .2, 1);
+
+:host {
+    width: 100%;
+    display: block;
+}
+
+.post-car {
+    position: relative;
+
+    width: 100%;
+    min-height: 100%;
+
+    padding: 1rem;
+
+    overflow: hidden;
+
+    &__bg {
+        position: absolute;
+        inset: 0;
+
+        background:
+            radial-gradient(circle at top right,
+                rgba(109, 90, 232, .16),
+                transparent 25%),
+            radial-gradient(circle at bottom left,
+                rgba(59, 130, 246, .10),
+                transparent 30%);
+    }
+
+    &__card {
+        position: relative;
+        z-index: 2;
+
+        width: 100%;
+        max-width: 75rem;
+
+        margin: 0 auto;
+
+        padding: 2rem;
+
+        border-radius: 1.5rem;
+
+        border: .0625rem solid $border;
+
+        background: rgba($surface, .88);
+
+        backdrop-filter: blur(1.4rem);
+        -webkit-backdrop-filter: blur(1.4rem);
+
+        box-shadow: $shadow;
+    }
+
+    &__header {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 1rem;
+
+        margin-bottom: 2rem;
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+
+            color: $text;
+
+            line-height: 1.1;
+
+            margin-bottom: .35rem;
+        }
+
+        p {
+            font-size: .95rem;
+
+            color: $muted;
+        }
+    }
+
+    &__badge {
+        padding: .8rem 1.2rem;
+
+        border-radius: 100rem;
+
+        background: rgba(109, 90, 232, .14);
+
+        border: .0625rem solid rgba(109, 90, 232, .24);
+
+        color: $accent-light;
+
+        font-size: .85rem;
+        font-weight: 600;
+    }
+}
+
+.car-form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+    &__row {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 1.5rem;
+    }
+
+    &__actions {
+        width: 100%;
+
+        display: flex;
+        justify-content: flex-end;
+
+        gap: 1rem;
+
+        margin-top: .5rem;
+    }
+}
+
+.field {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: .7rem;
+
+    &__error {
+        min-height: 1.2rem;
+        font-size: .78rem;
+        font-weight: 500;
+        color: #ff6b6b;
+        padding-left: .2rem;
+        transition: all .2s ease;
+    }
+
+    &--full {
+        grid-column: span 2;
+    }
+
+    label {
+        font-size: .85rem;
+        font-weight: 600;
+
+        letter-spacing: .03rem;
+
+        color: $muted;
+    }
+
+    &__wrapper {
+        position: relative;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+
+        border: .0625rem solid $border;
+
+        background: rgba($surface-light, .75);
+
+        color: $text;
+
+        outline: none;
+
+        border-radius: 1rem;
+
+        transition:
+            border-color .2s $ease,
+            background .2s $ease,
+            box-shadow .2s $ease,
+            transform .2s $ease;
+
+        &:focus {
+            border-color: rgba(109, 90, 232, .45);
+
+            background: rgba($surface-hover, .92);
+
+            box-shadow:
+                0 0 0 .2rem rgba(109, 90, 232, .12);
+        }
+
+        &:hover {
+            border-color: $border-hover;
+        }
+
+        &::placeholder {
+            color: rgba(107, 111, 133, .6);
+        }
+    }
+
+    input,
+    select {
+        height: 3.5rem;
+
+        padding: 0 1rem;
+
+        font-size: .95rem;
+    }
+
+    textarea {
+        resize: none;
+
+        padding: 1rem;
+
+        font-size: .95rem;
+
+        min-height: 10rem;
+    }
+
+    select {
+        cursor: pointer;
+
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        background-image:
+            linear-gradient(45deg, transparent 50%, #b3a4f8 50%),
+            linear-gradient(135deg, #b3a4f8 50%, transparent 50%);
+
+        background-position:
+            calc(100% - 1.2rem) calc(1.5rem),
+            calc(100% - .9rem) calc(1.5rem);
+
+        background-size: .4rem .4rem;
+
+        background-repeat: no-repeat;
+    }
+}
+
+.btn {
+    min-width: 9rem;
+    height: 3.2rem;
+
+    padding: 0 1.4rem;
+
+    border: none;
+
+    border-radius: 1rem;
+
+    cursor: pointer;
+
+    font-size: .92rem;
+    font-weight: 700;
+
+    transition:
+        transform .2s $ease,
+        box-shadow .2s $ease,
+        opacity .2s $ease;
+
+    &:hover {
+        transform: translateY(-.1rem);
+    }
+
+    &:active {
+        transform: scale(.98);
+    }
+
+    &--primary {
+        color: #fff;
+
+        background:
+            linear-gradient(135deg,
+                $accent,
+                #3b82f6);
+
+        box-shadow:
+            0 .7rem 2rem rgba(109, 90, 232, .35);
+
+        &:disabled {
+            opacity: .45;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+    }
+
+    &--secondary {
+        background: rgba($surface-light, .9);
+
+        border: .0625rem solid $border;
+
+        color: $text;
+
+        &:hover {
+            border-color: $border-hover;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .post-car {
+        padding: .5rem;
+
+        &__card {
+            padding: 1.2rem;
+        }
+
+        &__header {
+            flex-direction: column;
+            align-items: flex-start;
+
+            h2 {
+                font-size: 1.6rem;
+            }
+        }
+    }
+
+    .car-form {
+
+        &__row {
+            grid-template-columns: 1fr;
+        }
+
+        &__actions {
+            flex-direction: column;
+        }
+    }
+
+    .field {
+
+        &--full {
+            grid-column: span 1;
+        }
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    input[type="date"] {
+        color-scheme: dark;
+    }
+}

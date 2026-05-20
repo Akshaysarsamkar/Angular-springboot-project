@@ -1,0 +1,158 @@
+<div class="booked-cars">
+
+    <div class="booked-cars__header">
+
+        <h1>
+            Booked Cars History
+        </h1>
+
+        <p>
+            All customer booked car details
+        </p>
+
+    </div>
+
+    <div class="table-wrapper">
+
+        <table class="booking-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>Customer</th>
+
+                    <th>Email</th>
+
+                    <th>Car Image</th>
+
+                    <th>Days</th>
+
+                    <th>From Date</th>
+
+                    <th>To Date</th>
+
+                    <th>Total Price</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let booking of bookedCars; let i = index">
+
+                    <td>
+                        {{ i + 1 }}
+                    </td>
+
+                    <td>
+                        {{ booking.user_name }}
+                    </td>
+
+                    <td>
+                        {{ booking.email }}
+                    </td>
+
+                    <td>
+
+                        <img
+                            [src]="booking.imgUrl"
+                            alt="car-image"
+                            class="car-image">
+
+                    </td>
+
+                    <td>
+                        {{ booking.days }}
+                    </td>
+
+                    <td>
+                        {{ booking.fromDate | date:'dd MMM yyyy' }}
+                    </td>
+
+                    <td>
+                        {{ booking.toDate | date:'dd MMM yyyy' }}
+                    </td>
+
+                    <td>
+                        ₹ {{ booking.price }}
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="status"
+                            [ngClass]="{
+                                'status--pending': booking.bookCarStatus === 'PENDING',
+                                'status--approved': booking.bookCarStatus === 'APPROVED',
+                                'status--rejected': booking.bookCarStatus === 'REJECTED'
+                            }">
+
+                            {{ booking.bookCarStatus }}
+
+                        </span>
+
+                    </td>
+
+                    <td class="action-column">
+
+                        <div class="action-icons">
+
+                            <button
+                                class="icon-btn icon-btn--accept"
+                                (click)="updateBookingStatus(booking.id,'APPROVED')"
+                                [disabled]="
+                                    booking.bookCarStatus === 'APPROVED' ||
+                                    booking.bookCarStatus === 'REJECTED' ||
+                                    booking.isUpdating
+                                ">
+
+                                ✓
+
+                            </button>
+
+                            <button
+                                class="icon-btn icon-btn--reject"
+                                (click)="updateBookingStatus(booking.id,'REJECTED')"
+                                [disabled]="
+                                    booking.bookCarStatus === 'APPROVED' ||
+                                    booking.bookCarStatus === 'REJECTED' ||
+                                    booking.isUpdating
+                                ">
+
+                                ✕
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <tr *ngIf="!bookedCars.length">
+
+                    <td colspan="10" class="empty-data">
+
+                        No Booking History Found
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<app-spinner-loader *ngIf="isloading"></app-spinner-loader>

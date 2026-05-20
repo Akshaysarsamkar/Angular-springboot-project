@@ -1,0 +1,19 @@
+<div class="customer-page">
+    <!-- Header -->
+    <div class="customer-page__header">
+        <div>
+            <h1>Available Cars</h1>
+            <p>Choose your perfect ride from premium collections.</p>
+        </div>
+        <button class="explore-btn"> Explore Cars</button>
+    </div>
+
+    <!-- Car List -->
+    <div class="cars-list">
+        <app-car-details-card
+            *ngFor="let car of carDetails()"
+            [carDetails]="car">
+        </app-car-details-card>
+    </div>
+</div>
+<app-spinner-loader *ngIf="isLoading()"></app-spinner-loader>

@@ -1,0 +1,166 @@
+<div class="booking-page">
+
+    <!-- HEADER -->
+    <div class="booking-page__header">
+
+        <h1>
+            My Bookings
+        </h1>
+
+        <p>
+            View all your booked cars and booking details.
+        </p>
+
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div
+        class="empty-state"
+        *ngIf="!bookings().length && !isLoading()">
+
+        <h2>
+            No Bookings Found
+        </h2>
+
+        <p>
+            You have not booked any cars yet.
+        </p>
+
+    </div>
+
+    <!-- BOOKING LIST -->
+    <div
+        class="booking-list"
+        *ngIf="bookings().length">
+
+        <div
+            class="booking-card"
+            *ngFor="let booking of bookings()">
+
+            <!-- IMAGE -->
+            <div class="booking-card__image">
+
+                <img
+                    [src]="booking.imgUrl"
+                    [alt]="booking.carName">
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="booking-card__content">
+
+                <!-- TOP -->
+                <div class="booking-card__top">
+
+                    <div>
+
+                        <h2>
+                            {{ booking.carName }}
+                        </h2>
+
+                        <p>
+                            {{ booking.brand }}
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="status"
+                        [ngClass]="{
+                            'pending': booking.bookCarStatus === 'PENDING',
+                            'approved': booking.bookCarStatus === 'APPROVED',
+                            'rejected': booking.bookCarStatus === 'REJECTED'
+                        }">
+
+                        {{ booking.bookCarStatus }}
+
+                    </div>
+
+                </div>
+
+                <!-- DETAILS -->
+                <div class="booking-details">
+
+                    <div class="detail-item">
+
+                        <span>
+                            Booking ID
+                        </span>
+
+                        <h4>
+                            #{{ booking.id }}
+                        </h4>
+
+                    </div>
+
+                    <div class="detail-item">
+
+                        <span>
+                            Total Days
+                        </span>
+
+                        <h4>
+                            {{ booking.days }} Days
+                        </h4>
+
+                    </div>
+
+                    <div class="detail-item">
+
+                        <span>
+                            From Date
+                        </span>
+
+                        <h4>
+                            {{ booking.fromDate | date:'dd MMM yyyy' }}
+                        </h4>
+
+                    </div>
+
+                    <div class="detail-item">
+
+                        <span>
+                            To Date
+                        </span>
+
+                        <h4>
+                            {{ booking.toDate | date:'dd MMM yyyy' }}
+                        </h4>
+
+                    </div>
+
+                    <div class="detail-item">
+
+                        <span>
+                            Total Price
+                        </span>
+
+                        <h4>
+                            ₹ {{ booking.price }}
+                        </h4>
+
+                    </div>
+
+                    <div class="detail-item">
+
+                        <span>
+                            Email
+                        </span>
+
+                        <h4>
+                            {{ booking.email }}
+                        </h4>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<app-spinner-loader *ngIf="isLoading()"></app-spinner-loader>
